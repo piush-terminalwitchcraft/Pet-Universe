@@ -1,6 +1,7 @@
 package com.example.petuniverse.adapters
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.transition.Transition
 import android.util.Log
@@ -18,12 +19,19 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.example.petuniverse.R
 import com.example.petuniverse.models.petsDetails
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class UserUploadedPetsAdapter(private val petLists: ArrayList<petsDetails>,private val documentID: ArrayList<String>)
     : RecyclerView.Adapter<UserUploadedPetsAdapter.ViewHolder>() {
 
+    val imageRef = Firebase.storage.reference
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,22 +49,16 @@ class UserUploadedPetsAdapter(private val petLists: ArrayList<petsDetails>,priva
             Log.e("Document ID",petData.picture.toString())
         }
         if(!petData.picture.isNullOrEmpty()){
-            val pic = holder.firebaseStore.getReference(petData.picture!!)
-            Glide.with(holder.itemView.context).asBitmap().load(pic.downloadUrl)
-                .into(object : CustomTarget<Bitmap>(){
-                override fun onResourceReady(
-                    resource: Bitmap,
-                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
-                ) {
+            val bytes = imageRef.child(petData.picture!!).getBytes(5L*1024*1024)
+                .addOnSuccessListener {
+                    val bmp = BitmapFactory.decodeByteArray(it, 0, it.size)
+                    val compressedBitmap = Bitmap.createScaledBitmap(bmp,600,600,true)
+                    holder.petImage.setImageBitmap(compressedBitmap)
+                }
+                .addOnFailureListener {
+                    Toast.makeText(holder.itemView.context,it.toString(),Toast.LENGTH_LONG).show()
+                }
 
-                }
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    // this is called when imageView is cleared on lifecycle call or for
-                    // some other reason.
-                    // if you are referencing the bitmap somewhere else too other than this imageView
-                    // clear it here as you can no longer have the bitmap
-                }
-            })
 
         }
         else{
@@ -75,8 +77,7 @@ class UserUploadedPetsAdapter(private val petLists: ArrayList<petsDetails>,priva
         val petDescription = itemView.findViewById<TextView>(R.id.pet_description)
         val petInfo = itemView.findViewById<TextView>(R.id.pet_info)
         val petImage = itemView.findViewById<ImageView>(R.id.pet_image)
-        val firebaseStore: FirebaseStorage = FirebaseStorage.getInstance()
-        val storageReference: StorageReference = FirebaseStorage.getInstance().reference
+
     }
 
 }
