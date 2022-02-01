@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/pet_image"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            app:riv_corner_radius="72dp"
+            app:layout_constraintEnd_toStartOf="@id/pet_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Kattie"
+            android:textSize="24dp"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            />
+        <TextView
+            android:id="@+id/pet_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/pet_name"
+            android:text="$1000"
+            android:textSize="16dp"
+
+            />
+        <TextView
+            android:id="@+id/pet_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/pet_name"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="80dp"
+            android:text="Cats | Male "
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18dp"
+            android:layout_marginTop="8dp"
+            />
+
+        <TextView
+            android:id="@+id/pet_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/pet_info"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="80dp"
+            android:text="fluffy cat , very cute cat of 8 years old and
+            loves to play with ball . loves to eat fish and has long whiskey and long tail with beautiful fluffy ears"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

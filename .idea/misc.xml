@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/drawable/bottom_nav_bg.xml" value="0.19054054054054054" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/drawable/bottom_nav_icon.xml" value="0.19054054054054054" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/drawable/circle.xml" value="0.2203125" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.19054054054054054" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/fragment_home.xml" value="0.17657657657657658" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/fragment_post.xml" value="0.1" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/item_lists.xml" value="0.22" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/items.xml" value="0.5" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/nav_header.xml" value="0.2" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/user_pet_items.xml" value="0.25" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/menu/bottom_menu.xml" value="0.1" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/menu/side_menu.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
