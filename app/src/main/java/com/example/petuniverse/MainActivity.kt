@@ -1,5 +1,6 @@
 package com.example.petuniverse
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -74,7 +75,6 @@ class MainActivity : AppCompatActivity() {
                     Status.PENDING -> addViewModel.setstatus(Status.DONE)
                     else -> addViewModel.setstatus(Status.PENDING)
                 }
-                Log.e("Hello ", addViewModel.status.value.toString())
             }
         }
 
@@ -83,6 +83,17 @@ class MainActivity : AppCompatActivity() {
         addViewModel.status.observe(this, Observer { it->
             setIcon()
         })
+
+        navigationView.setNavigationItemSelectedListener { menuItem->
+            val destinationActivity = when(menuItem.itemId){
+                R.id.nav_log_in_sign_out -> LogInSignOutActivity::class.java
+                R.id.nav_chats -> ChatActivity::class.java
+                else -> MainActivity::class.java
+            }
+            startActivity(Intent(this,destinationActivity))
+
+            true
+        }
     }
 
     private fun setIcon() {

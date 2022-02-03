@@ -32,15 +32,15 @@
 
 
             <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/pet_image2"
                 android:layout_width="256dp"
                 android:layout_height="256dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="32dp"
-                android:id="@+id/pet_image2"
-                android:src="@color/primarydark"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp"
+                android:src="@color/background"
                 app:layout_constraintStart_toStartOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_corner_radius="256dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/name_textfield"

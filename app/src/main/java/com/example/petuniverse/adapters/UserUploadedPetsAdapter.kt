@@ -49,6 +49,7 @@ class UserUploadedPetsAdapter(private val petLists: ArrayList<petsDetails>,priva
             Log.e("Document ID",petData.picture.toString())
         }
         if(!petData.picture.isNullOrEmpty()){
+            holder.petImage.setImageResource(R.drawable.circle)
             val bytes = imageRef.child(petData.picture!!).getBytes(5L*1024*1024)
                 .addOnSuccessListener {
                     val bmp = BitmapFactory.decodeByteArray(it, 0, it.size)
@@ -57,7 +58,9 @@ class UserUploadedPetsAdapter(private val petLists: ArrayList<petsDetails>,priva
                 }
                 .addOnFailureListener {
                     Toast.makeText(holder.itemView.context,it.toString(),Toast.LENGTH_LONG).show()
+                    holder.petImage.setImageResource(R.color.backgroundcolor)
                 }
+
 
 
         }
