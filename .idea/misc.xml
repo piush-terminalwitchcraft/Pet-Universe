@@ -9,9 +9,11 @@
         <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/drawable/ic_baseline_add_a_photo_24.xml" value="0.1535" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.19054054054054054" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/activity_chat.xml" value="0.22" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/activity_log_in_sign_out.xml" value="0.15" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/activity_sign_in.xml" value="0.75" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/fragment_home.xml" value="0.17657657657657658" />
-        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/fragment_post.xml" value="0.15555555555555556" />
+        <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/fragment_post.xml" value="0.33" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/item_lists.xml" value="0.22" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/PetUniverse/app/src/main/res/layout/items.xml" value="0.5" />

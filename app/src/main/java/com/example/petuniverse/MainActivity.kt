@@ -26,6 +26,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -34,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var floatingActionButton: FloatingActionButton
     private lateinit var navigationView: NavigationView
     private lateinit var progressBar: ProgressBar
+    private lateinit var Auth: FirebaseAuth
     private val addViewModel : AddViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +51,8 @@ class MainActivity : AppCompatActivity() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.main_activity_nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         supportActionBar?.hide()
+
+        Auth = Firebase.auth
 
         bottomNavigationView.setOnItemSelectedListener {
             val destcodes = when(it.itemId) {
@@ -86,7 +92,7 @@ class MainActivity : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener { menuItem->
             val destinationActivity = when(menuItem.itemId){
-                R.id.nav_log_in_sign_out -> LogInSignOutActivity::class.java
+                R.id.nav_log_in_sign_out -> ActivityUser()
                 R.id.nav_chats -> ChatActivity::class.java
                 else -> MainActivity::class.java
             }
@@ -94,6 +100,11 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+    }
+
+    private fun ActivityUser(): Class<*>? {
+        if(Auth.currentUser==null) return SignIn::class.java
+        else return LogOut::class.java
     }
 
     private fun setIcon() {
