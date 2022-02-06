@@ -7,14 +7,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petuniverse.R
 import com.example.petuniverse.adapters.UserUploadedPetsAdapter
 import com.example.petuniverse.data.firestoreData
 import com.example.petuniverse.models.petsDetails
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
 
@@ -22,7 +26,9 @@ class ProfileFragment : Fragment() {
     private lateinit var UserPetsAdapter: UserUploadedPetsAdapter
     private lateinit var UserPetList:ArrayList<petsDetails>
     private lateinit var documentID : ArrayList<String>
+    private lateinit var UserName : TextView
     private lateinit var db: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +36,12 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_profile, container, false)
+        auth = Firebase.auth
         UserPetsRecyclerView = view.findViewById(R.id.user_uploaded_pets_recyclerview)
+        UserName = view.findViewById(R.id.user_name)
+        if(auth.currentUser!= null){
+            UserName.text = auth.currentUser!!.displayName
+        }
         UserPetsRecyclerView.layoutManager = LinearLayoutManager(context)
         UserPetsRecyclerView.setHasFixedSize(true)
         UserPetList = arrayListOf()
@@ -46,7 +57,7 @@ class ProfileFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun EventChangeListener() {
         db = FirebaseFirestore.getInstance()
-        db.collection("Pets").whereEqualTo("user","piushpaul.16@gmail.com")
+        db.collection("Pets").whereEqualTo("user",auth.currentUser?.email.toString())
             .addSnapshotListener { value, error ->
                 if(error==null){
                     if (value != null) {

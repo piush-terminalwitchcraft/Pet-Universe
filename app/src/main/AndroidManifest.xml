@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetUniverse">
         <activity
+            android:name=".LogIn"
+            android:exported="false" />
+        <activity
             android:name=".LogOut"
             android:exported="false" />
         <activity

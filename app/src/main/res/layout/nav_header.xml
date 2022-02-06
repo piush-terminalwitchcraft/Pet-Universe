@@ -7,6 +7,7 @@
     android:layout_margin="16dp">
 
     <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/user_profie_picture"
         android:layout_width="64dp"
         android:layout_height="64dp"
         app:riv_corner_radius="64dp"
@@ -26,15 +27,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="piushpaul.16@gmail.com"
+        android:text="email@gmail.com"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="12sp"
-        />
+        android:textSize="12sp" />
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:layout_marginTop="30dp"
-        android:background="@color/background"
-
-        />
+        android:background="@color/background" />
 </LinearLayout>

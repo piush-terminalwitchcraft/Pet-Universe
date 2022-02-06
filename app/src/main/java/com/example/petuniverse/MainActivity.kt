@@ -7,6 +7,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
@@ -54,6 +55,14 @@ class MainActivity : AppCompatActivity() {
 
         Auth = Firebase.auth
 
+        val headerView = navigationView.getHeaderView(0)
+        val userName = headerView.findViewById<TextView>(R.id.user_name)
+        val userEmail = headerView.findViewById<TextView>(R.id.user_email)
+        if(Auth.currentUser != null){
+            userName.text = Auth.currentUser!!.displayName.toString()
+            userEmail.text = Auth.currentUser!!.email.toString()
+        }
+
         bottomNavigationView.setOnItemSelectedListener {
             val destcodes = when(it.itemId) {
                 R.id.bottom_nav_home -> 1
@@ -69,17 +78,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         floatingActionButton.setOnClickListener {
-            val currcodes = getCodes(navController.currentDestination?.label)
-            if(2!=currcodes){
-                addViewModel.setstatus(Status.START)
-                setIcon()
-                navController.navigate(getFragmentTranscationID(currcodes,2))
+            if(Auth.currentUser == null){
+                Toast.makeText(this,"Login to access this section!",Toast.LENGTH_SHORT).show()
             }
             else{
-                when (addViewModel.status.value) {
-                    Status.START -> addViewModel.setstatus(Status.PENDING)
-                    Status.PENDING -> addViewModel.setstatus(Status.DONE)
-                    else -> addViewModel.setstatus(Status.PENDING)
+                val currcodes = getCodes(navController.currentDestination?.label)
+                if(2!=currcodes){
+                    addViewModel.setstatus(Status.START)
+                    setIcon()
+                    navController.navigate(getFragmentTranscationID(currcodes,2))
+                }
+                else{
+                    when (addViewModel.status.value) {
+                        Status.START -> addViewModel.setstatus(Status.PENDING)
+                        Status.PENDING -> addViewModel.setstatus(Status.DONE)
+                        else -> addViewModel.setstatus(Status.PENDING)
+                    }
                 }
             }
         }

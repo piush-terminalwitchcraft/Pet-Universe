@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_profile_pic"
-        android:text="Piush Paul"
+        android:text="User"
         style="@style/TextAppearance.MaterialComponents.Body1"
         android:textSize="32dp"
         />

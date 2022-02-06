@@ -25,7 +25,10 @@ import com.example.petuniverse.models.Status
 import com.example.petuniverse.models.petsDetails
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.IOException
@@ -45,6 +48,7 @@ class PostFragment : Fragment() {
     private lateinit var Image : ImageView
     private lateinit var firebaseStore: FirebaseStorage
     private lateinit var storageReference: StorageReference
+    private lateinit var auth : FirebaseAuth
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,6 +60,7 @@ class PostFragment : Fragment() {
 
         firebaseStore = FirebaseStorage.getInstance()
         storageReference = FirebaseStorage.getInstance().reference
+        auth = Firebase.auth
 
         textFieldCategory = view.findViewById(R.id.category)
         textFieldDescription  = view.findViewById(R.id.textfield_category)
@@ -120,7 +125,7 @@ class PostFragment : Fragment() {
 
     private fun uploadData(imgPath: String) {
         Log.e("Here!" ,"UploadData")
-        val PetsInfo = petsDetails("piushpaul.16@gmail.com",
+        val PetsInfo = petsDetails(auth.currentUser!!.email.toString(),
             Price.text.toString().toInt(),imgPath,textFieldCategory.text.toString(),
             Description.text.toString(),Name.text.toString(),"Male")
         val db = FirebaseFirestore.getInstance().collection("Pets")
@@ -140,7 +145,7 @@ class PostFragment : Fragment() {
 
     private fun uploadImage() {
         if(filePath != null){
-            val imgPath = "PetsImage/" + "piushpaul.16@gmail.com"+
+            val imgPath = "PetsImage/" + auth.currentUser!!.email.toString()+
                     SimpleDateFormat("dd.MM.yyyy'|'HH.mm.ss").format(Date()).toString()
             val ref = storageReference?.child(imgPath)
             ref.putFile(filePath!!)
