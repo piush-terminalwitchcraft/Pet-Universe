@@ -6,8 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".LogOut">
 
+
+
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/detete_cardview"
+        android:id="@+id/delete_cardview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -16,7 +19,10 @@
         app:cardCornerRadius="20dp"
         app:cardElevation="20dp"
         android:layout_gravity="center"
-        android:layout_margin="25dp"
+        android:layout_marginTop="256dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="48dp"
         android:clickable="true"
         android:focusable="true">
 
@@ -42,13 +48,15 @@
     <androidx.cardview.widget.CardView
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detete_cardview"
+        app:layout_constraintTop_toBottomOf="@id/delete_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
         app:cardElevation="20dp"
         android:layout_gravity="center"
-        android:layout_margin="25dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:clickable="true"
         android:focusable="true">
 

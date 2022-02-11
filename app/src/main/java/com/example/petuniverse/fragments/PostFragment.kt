@@ -147,7 +147,7 @@ class PostFragment : Fragment() {
         if(filePath != null){
             val imgPath = "PetsImage/" + auth.currentUser!!.email.toString()+
                     SimpleDateFormat("dd.MM.yyyy'|'HH.mm.ss").format(Date()).toString()
-            val ref = storageReference?.child(imgPath)
+            val ref = storageReference.child(imgPath)
             ref.putFile(filePath!!)
                 .addOnSuccessListener {
                     uploadData(imgPath)
@@ -197,8 +197,5 @@ class PostFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         addViewModel.setstatus(Status.INITIAL)
-
     }
-
-
 }

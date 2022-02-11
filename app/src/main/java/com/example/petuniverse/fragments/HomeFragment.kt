@@ -24,12 +24,6 @@ class HomeFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var db: FirebaseFirestore
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,52 +31,55 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        recyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.setHasFixedSize(true)
 
-        userdata = arrayListOf()
-        documentID = arrayListOf()
 
-        adapter = RecyclerAdapter(userdata,documentID)
-        recyclerView.adapter = adapter
-        EventChangeListener()
+
+//        recyclerView = view.findViewById(R.id.recyclerView)
+//        recyclerView.layoutManager = LinearLayoutManager(context)
+//        recyclerView.setHasFixedSize(true)
+//
+//        userdata = arrayListOf()
+//        documentID = arrayListOf()
+//
+//        adapter = RecyclerAdapter(userdata,documentID)
+//        recyclerView.adapter = adapter
+//        EventChangeListener()
         return view
     }
 
-    private fun EventChangeListener() {
-        db = FirebaseFirestore.getInstance()
-        db.collection("User")
-            .addSnapshotListener { value, error ->
-                if(error == null) {
-                    if (value != null) {
-                        for(dc in value.documentChanges){
-                            if(dc.type == DocumentChange.Type.ADDED){
-                                userdata.add(dc.document.toObject(firestoreData::class.java))
-                                documentID.add(dc.document.id)
-                            }
-                            else {
-                                val idx = documentID.indexOfFirst { it==dc.document.id }
-                                if(idx != -1){
-                                    if(dc.type == DocumentChange.Type.REMOVED){
-                                        userdata.removeAt(idx)
-                                        documentID.removeAt(idx)
-                                    }
-                                    else{
-                                        val obj = dc.document.toObject(firestoreData::class.java)
-                                        userdata[idx].ProfilePic = obj.ProfilePic
-                                        userdata[idx].ab = obj.ab
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                adapter.notifyDataSetChanged()
-
-            }
-    }
+//    private fun EventChangeListener() {
+//        db = FirebaseFirestore.getInstance()
+//        db.collection("User")
+//            .addSnapshotListener { value, error ->
+//                if(error == null) {
+//                    if (value != null) {
+//                        for(dc in value.documentChanges){
+//                            if(dc.type == DocumentChange.Type.ADDED){
+//                                userdata.add(dc.document.toObject(firestoreData::class.java))
+//                                documentID.add(dc.document.id)
+//                            }
+//                            else {
+//                                val idx = documentID.indexOfFirst { it==dc.document.id }
+//                                if(idx != -1){
+//                                    if(dc.type == DocumentChange.Type.REMOVED){
+//                                        userdata.removeAt(idx)
+//                                        documentID.removeAt(idx)
+//                                    }
+//                                    else{
+//                                        val obj = dc.document.toObject(firestoreData::class.java)
+//                                        userdata[idx].ProfilePic = obj.ProfilePic
+//                                        userdata[idx].ab = obj.ab
+//
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//                adapter.notifyDataSetChanged()
+//
+//            }
+//    }
 
 
 }

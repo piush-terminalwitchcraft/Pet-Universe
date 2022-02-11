@@ -27,24 +27,6 @@ class LogOut : AppCompatActivity() {
         val deleteUser: TextView = findViewById(R.id.deleteUser)
         deleteUser.setOnClickListener {
                 GetPassword()
-//            val password = "encxn"
-//            val credential = EmailAuthProvider
-//                .getCredential(user?.email.toString(),password)
-//            user!!.reauthenticate(credential)
-//                .addOnSuccessListener {
-//                    Log.d("Reauthenticate", "User re-authenticated.")
-//                    user.delete()
-//                        .addOnSuccessListener {
-//                        ToastMessage("Deleted successfully")
-//                        }
-//                        .addOnFailureListener {
-//                            ToastMessage(it.message.toString())
-//                        }
-//
-//                }
-//                .addOnFailureListener {
-//                    ToastMessage(it.message.toString())
-//                }
         }
 
         val logOutUser: TextView = findViewById(R.id.log_out_user)
