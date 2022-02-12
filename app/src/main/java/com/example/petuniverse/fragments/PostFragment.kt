@@ -88,7 +88,6 @@ class PostFragment : Fragment() {
 
         addViewModel.status.observe(viewLifecycleOwner, Observer { it->
             if(it == Status.PENDING){
-                Toast.makeText(context,"Pending",Toast.LENGTH_LONG).show()
                 if(checkErrors()){
                     uploadImage()
                 }

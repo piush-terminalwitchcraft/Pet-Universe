@@ -2,7 +2,6 @@ package com.example.petuniverse.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,22 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petuniverse.R
 import com.example.petuniverse.adapters.PetItemsAdapter
-import com.example.petuniverse.adapters.RecyclerAdapter
-import com.example.petuniverse.adapters.UserUploadedPetsAdapter
-import com.example.petuniverse.data.firestoreData
 import com.example.petuniverse.models.petsDetails
-import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.common.collect.Lists
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
 
 
 class HomeFragment : Fragment() {
-//    lateinit var userdata : ArrayList<firestoreData>
-//    lateinit var documentID : ArrayList<String>
-//    lateinit var adapter : RecyclerAdapter
     private lateinit var recentItemsRecyclerView: RecyclerView
     private lateinit var recommendedItemsRecyclerView: RecyclerView
     private lateinit var db: FirebaseFirestore
@@ -71,16 +60,6 @@ class HomeFragment : Fragment() {
         recentPetListAdapter = PetItemsAdapter(recentPetList,recentPetListdocumentID)
         recentItemsRecyclerView.adapter = recentPetListAdapter
         EventChangeListener()
-
-//        recyclerView = view.findViewById(R.id.recyclerView)
-//        recyclerView.layoutManager = LinearLayoutManager(context)
-//        recyclerView.setHasFixedSize(true)
-//
-//        userdata = arrayListOf()
-//        documentID = arrayListOf()
-//
-//        adapter = RecyclerAdapter(userdata,documentID)
-//        recyclerView.adapter = adapter
         return view
     }
 
@@ -116,6 +95,9 @@ class HomeFragment : Fragment() {
                 recentPetListAdapter.notifyDataSetChanged()
 
             }
+
+
+
     }
 
 
