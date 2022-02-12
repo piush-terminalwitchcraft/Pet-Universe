@@ -1,5 +1,6 @@
 package com.example.petuniverse.adapters
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
@@ -8,9 +9,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.petuniverse.LogIn
 import com.example.petuniverse.R
+import com.example.petuniverse.SignIn
 import com.example.petuniverse.models.petsDetails
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -20,7 +25,7 @@ class PetItemsAdapter
     : RecyclerView.Adapter<PetItemsAdapter.ViewHolder>(){
 
     val imageRef = Firebase.storage.reference
-
+    val auth = Firebase.auth
     override fun getItemCount(): Int {
         return petLists.size
     }
@@ -47,20 +52,23 @@ class PetItemsAdapter
                     Toast.makeText(holder.itemView.context,it.toString(), Toast.LENGTH_LONG).show()
                     holder.petImage.setImageResource(R.color.backgroundcolor)
                 }
-
-
-
         }
         else{
             holder.petImage.setImageResource(R.color.secondary)
         }
+
+        holder.cardView.setOnClickListener {
+           if(auth.currentUser?.email  != petData.user){
+           }
+        }
     }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val petName = itemView.findViewById<TextView>(R.id.pet_name_rv)
         val petCategory = itemView.findViewById<TextView>(R.id.pet_category_rv)
         val petPrice = itemView.findViewById<TextView>(R.id.pet_price_rv)
         val petImage = itemView.findViewById<ImageView>(R.id.pet_image_view_rv)
-
+        val cardView = itemView.findViewById<CardView>(R.id.pet_item_list_cardview)
     }
 
 }

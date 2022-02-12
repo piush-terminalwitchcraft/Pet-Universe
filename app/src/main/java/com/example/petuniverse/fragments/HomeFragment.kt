@@ -54,12 +54,13 @@ class HomeFragment : Fragment() {
         }
 
         if(auth.currentUser != null){
-            welcomeProfile.text = "Welcome " + auth.currentUser!!.displayName.toString()
+            ("Welcome back\n" + auth.currentUser!!.displayName.toString()).also { welcomeProfile.text = it }
         }
 
         recentPetListAdapter = PetItemsAdapter(recentPetList,recentPetListdocumentID)
         recentItemsRecyclerView.adapter = recentPetListAdapter
         EventChangeListener()
+
         return view
     }
 
