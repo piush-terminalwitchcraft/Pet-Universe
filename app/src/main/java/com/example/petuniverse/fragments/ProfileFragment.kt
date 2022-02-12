@@ -1,6 +1,7 @@
 package com.example.petuniverse.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -14,7 +15,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.petuniverse.LogOut
 import com.example.petuniverse.R
+import com.example.petuniverse.SignIn
 import com.example.petuniverse.adapters.UserUploadedPetsAdapter
 import com.example.petuniverse.data.firestoreData
 import com.example.petuniverse.models.petsDetails
@@ -38,6 +41,7 @@ class ProfileFragment : Fragment() {
     private lateinit var firebaseStore: FirebaseStorage
     private lateinit var storageReference: StorageReference
     private lateinit var userProfilePhoto: ImageView
+    private lateinit var editUserData : ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +55,16 @@ class ProfileFragment : Fragment() {
         UserPetsRecyclerView = view.findViewById(R.id.user_uploaded_pets_recyclerview)
         UserName = view.findViewById(R.id.user_name)
         userProfilePhoto = view.findViewById(R.id.user_profile_pic)
+        editUserData = view.findViewById(R.id.change_profile_pic)
 
+        editUserData.setOnClickListener {
+            if(auth.currentUser != null){
+                startActivity(Intent(context,LogOut::class.java))
+            }
+            else{
+                startActivity(Intent(context,SignIn::class.java))
+            }
+        }
         if(auth.currentUser!= null){
             UserName.text = auth.currentUser!!.displayName
             val reference = storageReference.child("UserProfilePic/" + auth.currentUser!!.email.toString())

@@ -6,6 +6,7 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -57,6 +58,7 @@ class LogOut : AppCompatActivity() {
         setContentView(R.layout.activity_log_out)
         supportActionBar?.hide()
 
+        auth = Firebase.auth
         firebaseStore = FirebaseStorage.getInstance()
         storageReference = FirebaseStorage.getInstance().reference
 
@@ -66,12 +68,30 @@ class LogOut : AppCompatActivity() {
         changeUserImageView = findViewById(R.id.change_profile_pic_alg)
         updateProfile = findViewById(R.id.update_cardview)
 
+
+        if(auth.currentUser!= null){
+            val reference = storageReference.child("UserProfilePic/" + auth.currentUser!!.email.toString())
+            reference.downloadUrl.addOnSuccessListener {
+                val bytes = reference.getBytes(5L*1024*1024)
+                    .addOnSuccessListener {
+                        val bmp = BitmapFactory.decodeByteArray(it, 0, it.size)
+                        val compressedBitmap = Bitmap.createScaledBitmap(bmp,600,600,true)
+                        userImageView.setImageBitmap(compressedBitmap)
+                    }
+                    .addOnFailureListener {
+                        ToastMessage(it.message.toString())
+                    }
+            }
+                .addOnFailureListener {
+                    ToastMessage(it.message.toString())
+                }
+
+        }
         changeUserImageView.setOnClickListener {
             getPermissions()
             changedProfilePic = true
         }
 
-        auth = Firebase.auth
         name.setText(auth.currentUser!!.displayName)
 
         Email.text = getString(R.string.Email,auth.currentUser!!.email)
