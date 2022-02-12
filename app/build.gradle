@@ -61,4 +61,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
 
     implementation 'androidx.activity:activity-ktx:1.4.0'
+
+    // Compress
+    implementation 'id.zelory:compressor:3.0.1'
 }

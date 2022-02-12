@@ -1,11 +1,14 @@
 package com.example.petuniverse
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -30,6 +33,8 @@ import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -39,6 +44,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navigationView: NavigationView
     private lateinit var progressBar: ProgressBar
     private lateinit var Auth: FirebaseAuth
+    private lateinit var storageReference: StorageReference
     private val addViewModel : AddViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,13 +60,31 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         Auth = Firebase.auth
+        storageReference = FirebaseStorage.getInstance().reference
 
         val headerView = navigationView.getHeaderView(0)
         val userName = headerView.findViewById<TextView>(R.id.user_name)
         val userEmail = headerView.findViewById<TextView>(R.id.user_email)
+        val userProfilePic = headerView.findViewById<ImageView>(R.id.user_profie_picture)
         if(Auth.currentUser != null){
             userName.text = Auth.currentUser!!.displayName.toString()
             userEmail.text = Auth.currentUser!!.email.toString()
+            val reference = storageReference.child("UserProfilePic/" + Auth.currentUser!!.email.toString())
+            reference.downloadUrl.addOnSuccessListener {
+                val bytes = reference.getBytes(5L*1024*1024)
+                    .addOnSuccessListener {
+                        val bmp = BitmapFactory.decodeByteArray(it, 0, it.size)
+                        val compressedBitmap = Bitmap.createScaledBitmap(bmp,600,600,true)
+                        userProfilePic.setImageBitmap(compressedBitmap)
+                    }
+                    .addOnFailureListener {
+                        ToastMessage(it.message.toString())
+                    }
+            }
+                .addOnFailureListener {
+                    ToastMessage(it.message.toString())
+                }
+
         }
 
         bottomNavigationView.setOnItemSelectedListener {
@@ -176,5 +200,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun ToastMessage(message: String) {
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show()
     }
 }

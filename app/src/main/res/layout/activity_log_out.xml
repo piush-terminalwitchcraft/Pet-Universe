@@ -6,8 +6,102 @@
     android:layout_height="match_parent"
     tools:context=".LogOut">
 
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/user_profile_pic_alg"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        app:riv_corner_radius="128dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/computer" />
+
+    <ImageView
+        android:id="@+id/change_profile_pic_alg"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="#00000000"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintEnd_toEndOf="@id/user_profile_pic_alg"
+        app:layout_constraintBottom_toBottomOf="@id/user_profile_pic_alg" />
 
 
+    <TextView
+        android:id="@+id/user_name_alg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:gravity="center"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="serif"
+        android:text="User Name"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_profile_pic_alg" />
+
+    <EditText
+        android:id="@+id/user_name_edittext_alg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="128dp"
+        android:fontFamily="serif"
+        app:layout_constraintStart_toEndOf="@id/user_name_alg"
+        app:layout_constraintTop_toTopOf="@id/user_name_alg"
+        android:layout_marginStart="16dp"
+        />
+
+    <TextView
+        android:id="@+id/user_email_alg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/user_name_edittext_alg"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="serif"
+        android:text="Email : piushpaul.16@gmail.com"
+        android:textSize="18dp"
+        />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/update_cardview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_email_alg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="48dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/updateUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Save changes"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/delete_cardview"
@@ -19,7 +113,7 @@
         app:cardCornerRadius="20dp"
         app:cardElevation="20dp"
         android:layout_gravity="center"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="456dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="48dp"
