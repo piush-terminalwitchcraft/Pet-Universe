@@ -47,6 +47,7 @@ class ProfileFragment : Fragment() {
         UserPetList = arrayListOf()
         documentID = arrayListOf()
 
+
         UserPetsAdapter = UserUploadedPetsAdapter(UserPetList,documentID)
         UserPetsRecyclerView.adapter = UserPetsAdapter
 

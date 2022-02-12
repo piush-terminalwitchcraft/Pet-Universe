@@ -25,12 +25,14 @@ import com.example.petuniverse.models.Status
 import com.example.petuniverse.models.petsDetails
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -46,6 +48,7 @@ class PostFragment : Fragment() {
     private lateinit var Name : TextInputEditText
     private lateinit var Price : TextInputEditText
     private lateinit var Image : ImageView
+    private lateinit var gender : RadioGroup
     private lateinit var firebaseStore: FirebaseStorage
     private lateinit var storageReference: StorageReference
     private lateinit var auth : FirebaseAuth
@@ -64,6 +67,7 @@ class PostFragment : Fragment() {
 
         textFieldCategory = view.findViewById(R.id.category)
         textFieldDescription  = view.findViewById(R.id.textfield_category)
+        gender = view.findViewById(R.id.radioGroup)
         Name = view.findViewById(R.id.name)
         Price = view.findViewById(R.id.price)
         Description = view.findViewById(R.id.description)
@@ -124,10 +128,14 @@ class PostFragment : Fragment() {
     }
 
     private fun uploadData(imgPath: String) {
+        val timeStamp = Timestamp(Date())
         Log.e("Here!" ,"UploadData")
         val PetsInfo = petsDetails(auth.currentUser!!.email.toString(),
             Price.text.toString().toInt(),imgPath,textFieldCategory.text.toString(),
-            Description.text.toString(),Name.text.toString(),"Male")
+            Description.text.toString(),Name.text.toString(),when(gender.checkedRadioButtonId){
+                R.id.Male -> "Male"
+                else -> "Female"
+            },timeStamp)
         val db = FirebaseFirestore.getInstance().collection("Pets")
             .add(PetsInfo)
             .addOnSuccessListener {
@@ -148,7 +156,11 @@ class PostFragment : Fragment() {
             val imgPath = "PetsImage/" + auth.currentUser!!.email.toString()+
                     SimpleDateFormat("dd.MM.yyyy'|'HH.mm.ss").format(Date()).toString()
             val ref = storageReference.child(imgPath)
-            ref.putFile(filePath!!)
+            val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver,filePath)
+            val baos = ByteArrayOutputStream()
+            bitmap!!.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+            val bytes = baos.toByteArray()
+            ref.putBytes(bytes)
                 .addOnSuccessListener {
                     uploadData(imgPath)
                 }

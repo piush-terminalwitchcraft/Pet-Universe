@@ -103,7 +103,7 @@
 
             <RadioGroup
                 android:id="@+id/radioGroup"
-                android:checkedButton="@+id/male"
+                android:checkedButton="@+id/Male"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -114,13 +114,13 @@
                 android:layout_marginEnd="32dp"
                 android:orientation="horizontal">
                 <RadioButton
-                    android:id="@+id/male"
+                    android:id="@+id/Male"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="16dp"
                     android:text="Male"/>
                 <RadioButton
-                    android:id="@+id/female"
+                    android:id="@+id/Female"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Female"/>
