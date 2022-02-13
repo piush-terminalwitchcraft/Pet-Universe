@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="server_client_id">209634819165-n5ha408gpnbsese61ofp611vrt4ge297.apps.googleusercontent.com</string>
     <string name="Email">Email : %s</string>
+    <string name="sold">SOLD</string>
+    <string name="unsold">UNSOLD</string>
+    <string name="price">₹ %s</string>
 </resources>

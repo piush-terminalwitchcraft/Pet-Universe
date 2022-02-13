@@ -10,6 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petuniverse.LogIn
 import com.example.petuniverse.R
@@ -38,8 +40,19 @@ class PetItemsAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val petData = petLists[position]
         holder.petName.text = petData.petName.toString()
-        holder.petPrice.text = petData.price.toString()
+        holder.petPrice.text =  holder.itemView.context.getString(R.string.price,petData.price.toString())
         holder.petCategory.text = petData.category.toString()
+        when(petData.status){
+            1-> {
+                holder.status.apply {
+                    background = ResourcesCompat.getDrawable(resources,R.color.red,null)
+                    text = "Sold"
+                }
+            }
+            else-> {
+                holder.status.visibility = View.GONE
+            }
+        }
         if(!petData.picture.isNullOrEmpty()){
             holder.petImage.setImageResource(R.drawable.circle)
             val bytes = imageRef.child(petData.picture!!).getBytes(5L*1024*1024)
@@ -69,6 +82,7 @@ class PetItemsAdapter
         val petPrice = itemView.findViewById<TextView>(R.id.pet_price_rv)
         val petImage = itemView.findViewById<ImageView>(R.id.pet_image_view_rv)
         val cardView = itemView.findViewById<CardView>(R.id.pet_item_list_cardview)
+        val status = itemView.findViewById<TextView>(R.id.pet_status_rv)
     }
 
 }

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ProfileFragment">
 
-
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/user_profile_pic"
         android:layout_width="128dp"
@@ -26,7 +25,6 @@
         android:src="@drawable/ic_baseline_edit_24"
         app:layout_constraintEnd_toEndOf="@id/user_profile_pic"
         app:layout_constraintBottom_toBottomOf="@id/user_profile_pic" />
-
 
     <TextView
         android:id="@+id/user_name"

@@ -32,7 +32,7 @@ class UserUploadedPetsAdapter
         val petData = petLists[position]
         holder.petName.text = petData.petName
         holder.petDescription.text = petData.description
-        ("₹" + petData.price.toString()).also { holder.petPrice.text = it }
+        holder.petPrice.text = holder.itemView.context.getString(R.string.price,petData.price.toString())
         (petData.gender + " | " + petData.category).also { holder.petInfo.text = it }
         holder.petPrice.setOnClickListener {
             Log.e("Document ID",petData.picture.toString())
