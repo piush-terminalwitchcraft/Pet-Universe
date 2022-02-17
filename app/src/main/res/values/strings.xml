@@ -7,4 +7,5 @@
     <string name="sold">SOLD</string>
     <string name="unsold">UNSOLD</string>
     <string name="price">₹ %s</string>
+    <string name="upload">Uploaded by %s</string>
 </resources>

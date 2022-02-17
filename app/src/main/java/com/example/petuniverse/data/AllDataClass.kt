@@ -11,5 +11,5 @@ data class petsDetails(var user:String? = "", var price: Int? = 0,
                 var picture: String? = "", var category: String? = "",
                 var description: String? = "", var petName: String? = "",
                 var gender: String? = "", var timestamp: Timestamp? = null,
-                var status: Int? = R.string.sold){
+                var status: Int? = R.string.sold) {
 }

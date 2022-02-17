@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.petuniverse.LogIn
 import com.example.petuniverse.R
 import com.example.petuniverse.SignIn
+import com.example.petuniverse.ViewPetDetails
 import com.example.petuniverse.models.petsDetails
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.google.gson.Gson
 
 
 class PetItemsAdapter
@@ -72,6 +74,10 @@ class PetItemsAdapter
 
         holder.cardView.setOnClickListener {
            if(auth.currentUser?.email  != petData.user){
+               val gson = Gson()
+               val intent = Intent(holder.itemView.context,ViewPetDetails::class.java)
+               intent.putExtra("PetDetail",gson.toJson(petData))
+               holder.itemView.context.startActivity(intent)
            }
         }
     }

@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class LogIn : AppCompatActivity() {
@@ -33,7 +34,17 @@ class LogIn : AppCompatActivity() {
         if(validateFields()){
             auth.signInWithEmailAndPassword(email.text.toString(),password.text.toString())
                 .addOnSuccessListener {
-                    startActivity(Intent(this,MainActivity::class.java))
+                    val uname = hashMapOf("username" to auth.currentUser!!.displayName.toString())
+                    val db = FirebaseFirestore.getInstance().collection("Users")
+                        .document(auth.currentUser!!.email.toString()).set(uname)
+                        .addOnSuccessListener {
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        .addOnFailureListener {
+                            ToastMessage(it.message.toString())
+                        }
                 }
                 .addOnFailureListener {
                     ToastMessage(it.message.toString())

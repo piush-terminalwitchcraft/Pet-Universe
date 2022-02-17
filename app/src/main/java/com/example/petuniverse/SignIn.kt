@@ -16,11 +16,18 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 class SignIn : AppCompatActivity() {
     private lateinit var name : TextInputEditText
     private lateinit var email : TextInputEditText
+    private lateinit var firebaseStore: FirebaseStorage
+    private lateinit var storageReference: StorageReference
+    private lateinit var firestore: FirebaseFirestore
     private lateinit var password : TextInputEditText
     private lateinit var confirmPassword : TextInputEditText
     private lateinit var LogInButton : Button
@@ -42,6 +49,9 @@ class SignIn : AppCompatActivity() {
         signIn = findViewById(R.id.Signin)
         signInGoogle = findViewById(R.id.SigninGoogle)
         auth = Firebase.auth
+        firebaseStore = FirebaseStorage.getInstance()
+        storageReference = FirebaseStorage.getInstance().reference
+        firebaseStore = FirebaseStorage.getInstance()
 
 
         signIn.setOnClickListener {
@@ -64,6 +74,7 @@ class SignIn : AppCompatActivity() {
             .build()
         val mGoogleSignInClient= GoogleSignIn.getClient(this,gso)
         val signInIntent:Intent=mGoogleSignInClient.signInIntent
+
         startActivityForResult(signInIntent,Req_Code)
     }
 
@@ -91,10 +102,20 @@ class SignIn : AppCompatActivity() {
         val credential= GoogleAuthProvider.getCredential(account.idToken,null)
         auth.signInWithCredential(credential).addOnCompleteListener {task->
             if(task.isSuccessful) {
-
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                val uname = hashMapOf("username" to auth.currentUser!!.displayName.toString())
+                val db = FirebaseFirestore.getInstance().collection("Users")
+                    .document(auth.currentUser!!.email.toString()).set(uname)
+                    .addOnSuccessListener {
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    .addOnFailureListener {
+                        ToastMessage(it.message.toString())
+                    }
+            }
+            else{
+                ToastMessage(task.exception.toString())
             }
         }
     }
