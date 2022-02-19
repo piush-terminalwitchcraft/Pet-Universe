@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetUniverse">
         <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewPetDetails"
             android:exported="false" />
         <activity

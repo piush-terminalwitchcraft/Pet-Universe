@@ -1,15 +1,18 @@
 package com.example.petuniverse.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petuniverse.R
+import com.example.petuniverse.SearchActivity
 import com.example.petuniverse.adapters.PetItemsAdapter
 import com.example.petuniverse.models.petsDetails
 import com.google.firebase.auth.FirebaseAuth
@@ -28,6 +31,7 @@ class HomeFragment : Fragment() {
     private lateinit var recommendedPetListAdapter: PetItemsAdapter
     private lateinit var auth : FirebaseAuth
     private lateinit var welcomeProfile: TextView
+    private lateinit var search : EditText
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +47,7 @@ class HomeFragment : Fragment() {
         welcomeProfile = view.findViewById(R.id.welcome_user)
         recentItemsRecyclerView = view.findViewById(R.id.recent_items_recyclerview)
         recommendedItemsRecyclerView = view.findViewById(R.id.reccommended_items_recyclerview)
+        search = view.findViewById(R.id.search_edittext)
         recentItemsRecyclerView.apply {
             LinearLayoutManager(context)
             setHasFixedSize(true)
@@ -51,6 +56,10 @@ class HomeFragment : Fragment() {
         recommendedItemsRecyclerView.apply {
             LinearLayoutManager(context)
             setHasFixedSize(true)
+        }
+// https:// curl -d "grant_type=client_credentials&client_id={CLIENT-ID}&client_secret={CLIENT-SECRET}"api.petfinder.com/v2/oauth2/token
+        search.setOnClickListener {
+            startActivity(Intent(context,SearchActivity::class.java))
         }
 
         if(auth.currentUser != null){

@@ -9,7 +9,6 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_top"
         android:layout_marginBottom="140dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,14 +17,15 @@
 
             <TextView
                 android:id="@+id/welcome_user"
-                android:textSize="32sp"
-                android:textStyle="bold|italic"
-                android:layout_marginStart="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:fontFamily="serif-monospace"
                 android:text="Welcome back \nUser1234"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
@@ -52,9 +52,11 @@
                 style="@style/general_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="serif"
                 android:text="Recent Items"
                 android:textSize="24sp"
-                app:layout_constraintTop_toBottomOf="@id/search_edittext" />
+                app:layout_constraintTop_toBottomOf="@id/search_edittext"
+                tools:layout_editor_absoluteX="16dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recent_items_recyclerview"
@@ -72,9 +74,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:fontFamily="serif"
                 android:text="Recommended Items"
                 android:textSize="24sp"
-                app:layout_constraintTop_toBottomOf="@id/recent_items_recyclerview" />
+                app:layout_constraintTop_toBottomOf="@id/recent_items_recyclerview"
+                tools:layout_editor_absoluteX="16dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/reccommended_items_recyclerview"
@@ -91,6 +95,7 @@
                 style="@style/general_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="serif"
                 android:layout_marginTop="16dp"
                 android:text="Categories"
                 android:textSize="24sp"
@@ -111,7 +116,6 @@
                     android:layout_width="200dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:onClick="widgetSelector"
                     android:src="@drawable/dog"
                     android:tag="3" />
 
@@ -120,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="@color/white"
-                    android:fontFamily="sans-serif-condensed-medium"
+                    android:fontFamily="serif-monospace"
                     android:gravity="center"
 
                     android:text="Dogs"
@@ -137,6 +141,7 @@
                 android:layout_marginTop="16dp"
                 app:cardBackgroundColor="@color/primary"
                 app:cardCornerRadius="30dp"
+                android:clickable="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dogs_cardview">
 
@@ -144,7 +149,6 @@
                     android:layout_width="200dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:onClick="widgetSelector"
                     android:src="@drawable/cat"
                     android:tag="3" />
 
@@ -153,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="@color/white"
-                    android:fontFamily="sans-serif-condensed-medium"
+                    android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:text="Cats"
                     android:textColor="@color/black"
@@ -167,6 +171,7 @@
                 android:layout_height="150dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:clickable="true"
                 app:cardBackgroundColor="@color/primary"
                 app:cardCornerRadius="30dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -176,7 +181,6 @@
                     android:layout_width="200dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:onClick="widgetSelector"
                     android:src="@drawable/bird"
                     android:tag="3" />
 
@@ -185,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="@color/white"
-                    android:fontFamily="sans-serif-condensed-medium"
+                    android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:text="Birds"
                     android:textColor="@color/black"
@@ -200,6 +204,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 app:cardBackgroundColor="@color/primary"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardCornerRadius="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bird_cardview">
@@ -208,7 +214,6 @@
                     android:layout_width="200dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:onClick="widgetSelector"
                     android:src="@drawable/fish"
                     android:tag="3" />
 
@@ -217,7 +222,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="@color/white"
-                    android:fontFamily="sans-serif-condensed-medium"
+                    android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:text="Fish"
                     android:textColor="@color/black"
@@ -226,6 +231,7 @@
             </androidx.cardview.widget.CardView>
 
             <com.google.android.material.divider.MaterialDivider
+                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_marginTop="32dp"
                 android:layout_height="1dp"
